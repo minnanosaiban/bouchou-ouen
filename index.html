@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>傍聴に行こう ｜ 応援傍聴カレンダー</title>
+<meta name="description" content="応援傍聴の呼びかけを一枚のカレンダーに。予約も費用もいりません。傍聴を呼びかけたい方からの掲載依頼をお待ちしています。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1A1A18;--ink-2:#54524B;--ink-3:#8C897F;
+  --paper:#F5F3ED;--card:#FFFFFF;--rule:#DBD7CC;--rule-2:#BFBAAB;
+  --stamp:#B93226;--go:#1D6047;--shut:#8C897F;
+  --kinari:#FCF6E4;--wakaba:#EFF5E8;--mizu:#EBF2F7;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);
+  font-family:"Zen Kaku Gothic New",-apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif;
+  font-size:15px;line-height:1.85;font-feature-settings:"palt" 1}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.mono{font-family:"Roboto Mono",monospace;font-feature-settings:normal}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--stamp);outline-offset:3px}
+
+.masthead{border-bottom:1px solid var(--ink)}
+.masthead .wrap{display:flex;align-items:center;gap:16px;padding:22px 20px 18px}
+.stamp{flex:none;width:56px;height:56px;border:2.5px solid var(--stamp);border-radius:6px;
+  display:grid;place-content:center;color:var(--stamp);
+  font-family:"Shippori Mincho",serif;font-weight:700;font-size:19px;line-height:1.1;
+  letter-spacing:.04em;text-align:center;transform:rotate(-4deg)}
+.masthead h1{font-family:"Shippori Mincho",serif;font-size:27px;font-weight:700;letter-spacing:.04em;line-height:1.3}
+.masthead p{font-size:12.5px;color:var(--ink-2);letter-spacing:.02em}
+
+.next{padding:34px 0 12px}
+.eyebrow{font-size:11.5px;letter-spacing:.22em;color:var(--ink-3);
+  display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--rule)}
+.ticket{display:grid;grid-template-columns:132px 1fr;background:var(--card);border:1px solid var(--ink);position:relative}
+.ticket .stub{border-right:2px dashed var(--rule-2);padding:20px 14px;text-align:center;
+  display:flex;flex-direction:column;justify-content:center;gap:2px;background:var(--kinari)}
+.stub .md{font-family:"Shippori Mincho",serif;font-size:30px;font-weight:700;line-height:1.15}
+.stub .dow{font-size:12px;color:var(--ink-2)}
+.stub .yr{font-size:11px;color:var(--ink-3);letter-spacing:.04em;margin-top:4px}
+.stub .tm{font-family:"Roboto Mono",monospace;font-size:15px;font-weight:500;margin-top:8px}
+.notch{position:absolute;left:132px;width:15px;height:15px;background:var(--paper);
+  border:1px solid var(--ink);border-radius:50%;transform:translateX(-8px)}
+.notch.t{top:-8px}.notch.b{bottom:-8px}
+.ticket .body{padding:20px 22px}
+.ticket h2{font-family:"Shippori Mincho",serif;font-size:21px;font-weight:700;line-height:1.45}
+.ticket .meta{font-size:13px;color:var(--ink-2);margin-top:5px}
+.ticket .lede{font-size:14px;margin-top:12px;padding-top:12px;border-top:1px solid var(--rule)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:13px}
+.tag{font-size:11.5px;letter-spacing:.03em;padding:2px 9px;border:1px solid currentColor;line-height:1.7}
+.tag.open{color:var(--go)}.tag.shut{color:var(--shut)}
+.tag.plain{color:var(--ink-2)}.tag.hot{color:var(--stamp)}
+
+.callout{margin:26px 0 0;border:1px solid var(--ink);background:var(--card);
+  display:grid;grid-template-columns:1fr auto;gap:22px;align-items:center;padding:20px 24px}
+.callout h2{font-family:"Shippori Mincho",serif;font-size:18px;font-weight:700;margin-bottom:5px}
+.callout p{font-size:13.5px;color:var(--ink-2)}
+.callout .mail{display:block;text-align:center;background:var(--ink);color:var(--paper);
+  text-decoration:none;padding:11px 24px;white-space:nowrap}
+.callout .mail:hover{background:var(--stamp)}
+.callout .mail small{display:block;font-size:11px;opacity:.75;font-family:"Roboto Mono",monospace;margin-top:2px}
+
+.cols{display:grid;grid-template-columns:1fr 356px;gap:26px;padding:34px 0 10px;align-items:start}
+.calhead{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px}
+.calhead .ym{font-family:"Shippori Mincho",serif;font-size:22px;font-weight:700}
+.calhead .ym small{font-size:12px;color:var(--ink-3);font-family:"Zen Kaku Gothic New",sans-serif;font-weight:400;margin-left:9px;letter-spacing:.03em}
+.nav{display:flex;gap:6px}
+.nav button{font:inherit;font-size:13px;background:var(--card);color:var(--ink);
+  border:1px solid var(--rule-2);padding:3px 13px;cursor:pointer;line-height:1.9}
+.nav button:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.dow-row{display:grid;grid-template-columns:repeat(7,1fr);border-top:1px solid var(--ink)}
+.dow-row div{font-size:11px;text-align:center;padding:5px 0;color:var(--ink-2);letter-spacing:.08em}
+.dow-row div:first-child,.dow-row div:last-child{color:var(--ink-3)}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);border-left:1px solid var(--rule)}
+.cell{min-height:86px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  border-top:1px solid var(--rule);margin-top:-1px;padding:5px 6px 7px;background:var(--card);
+  text-align:left;font:inherit;color:inherit;display:block;width:100%}
+.cell.blank{background:transparent;border-color:transparent}
+.cell .n{font-family:"Roboto Mono",monospace;font-size:12.5px;color:var(--ink-3)}
+.cell.today .n{color:var(--paper);background:var(--stamp);border-radius:50%;
+  width:20px;height:20px;display:inline-grid;place-content:center;font-size:11px}
+.cell.has{cursor:pointer}
+.cell.has:hover{background:var(--kinari)}
+.cell.sel{box-shadow:inset 0 0 0 2px var(--ink);position:relative;z-index:1}
+.chip{display:block;font-size:11px;line-height:1.45;margin-top:4px;padding:3px 5px;
+  border-left:3px solid var(--go);background:var(--wakaba);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chip.shut{border-left-color:var(--rule-2);background:#F1EFE9;color:var(--ink-2)}
+.chip .t{font-family:"Roboto Mono",monospace;font-size:10px;color:var(--ink-2);margin-right:3px}
+.legend{display:flex;gap:16px;font-size:11.5px;color:var(--ink-2);margin-top:11px;flex-wrap:wrap}
+.legend i{display:inline-block;width:16px;height:9px;margin-right:5px}
+.legend .a{background:var(--wakaba);border-left:3px solid var(--go)}
+.legend .b{background:#F1EFE9;border-left:3px solid var(--rule-2)}
+
+.panel{border:1px solid var(--ink);background:var(--card);position:sticky;top:16px}
+.panel .ph{padding:11px 16px;border-bottom:1px solid var(--ink);background:var(--ink);color:var(--paper);font-size:12px;letter-spacing:.14em}
+.panel .pb{padding:17px 18px 20px}
+.empty{color:var(--ink-3);font-size:13.5px;line-height:1.9;text-align:center;padding:32px 10px}
+.empty .big{font-family:"Shippori Mincho",serif;font-size:34px;color:var(--rule-2);display:block;margin-bottom:8px}
+.dt-date{font-family:"Roboto Mono",monospace;font-size:12px;color:var(--ink-2);letter-spacing:.03em}
+.dt-title{font-family:"Shippori Mincho",serif;font-size:19px;font-weight:700;line-height:1.5;margin-top:3px}
+.dt-no{font-family:"Roboto Mono",monospace;font-size:11.5px;color:var(--ink-3);margin-top:3px}
+.rows{width:100%;font-size:13px;margin-top:14px;border-top:1px solid var(--rule)}
+.rows th{text-align:left;font-weight:400;color:var(--ink-3);font-size:11.5px;
+  padding:7px 0;width:66px;vertical-align:top;letter-spacing:.06em}
+.rows td{padding:7px 0;vertical-align:top;border-bottom:1px solid var(--rule)}
+.dt-lede{font-size:13.5px;margin-top:15px;padding:13px 14px;background:var(--kinari);border:1px solid var(--rule)}
+.dt-lede .src{display:block;font-size:11px;color:var(--ink-3);margin-top:7px}
+.dt-h{font-size:11.5px;letter-spacing:.14em;color:var(--ink-3);margin-top:18px;margin-bottom:6px}
+.dt-points{font-size:13px;list-style:none}
+.dt-points li{position:relative;padding-left:18px;margin-bottom:5px}
+.dt-points li::before{content:"";position:absolute;left:0;top:.72em;width:8px;height:1px;background:var(--stamp)}
+.after{font-size:13px;padding:11px 13px;background:var(--mizu);border-left:3px solid var(--go)}
+.warn{font-size:12.5px;line-height:1.8;margin-top:16px;padding:11px 13px;
+  border:1px solid var(--shut);color:var(--ink-2);background:#F7F5F0}
+.warn b{color:var(--ink);font-weight:500}
+.multi{font-size:12px;color:var(--ink-2);margin-bottom:10px;padding-bottom:9px;border-bottom:1px dashed var(--rule-2)}
+.multi button{font:inherit;font-size:12px;background:none;border:1px solid var(--rule-2);padding:1px 9px;margin-right:5px;cursor:pointer}
+.multi button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+.sec{padding:40px 0 0}
+.sec > h2{font-family:"Shippori Mincho",serif;font-size:20px;font-weight:700;
+  padding-bottom:9px;border-bottom:1px solid var(--ink);margin-bottom:18px}
+.sec > h2 small{font-size:11.5px;color:var(--ink-3);font-family:"Zen Kaku Gothic New",sans-serif;font-weight:400;letter-spacing:.08em;margin-left:10px}
+.list{display:grid;gap:9px}
+.item{display:grid;grid-template-columns:74px 1fr;gap:16px;background:var(--card);
+  border:1px solid var(--rule);padding:13px 16px;cursor:pointer;text-align:left;
+  font:inherit;color:inherit;width:100%;align-items:start}
+.item:hover{border-color:var(--ink)}
+.item .d{text-align:center;border-right:1px solid var(--rule);padding-right:12px}
+.item .d .md{font-family:"Shippori Mincho",serif;font-size:20px;font-weight:700;line-height:1.2}
+.item .d .dw{font-size:11px;color:var(--ink-2)}
+.item .d .tm{font-family:"Roboto Mono",monospace;font-size:11px;color:var(--ink-3);margin-top:3px}
+.item .ti{font-size:14.5px;font-weight:500;line-height:1.6}
+.item .mt{font-size:12px;color:var(--ink-2);margin-top:2px}
+
+.guide{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.g{background:var(--card);padding:17px 18px 19px}
+.g h3{font-size:14.5px;font-weight:700;margin-bottom:6px;display:flex;align-items:baseline;gap:9px}
+.g h3 span{font-family:"Roboto Mono",monospace;font-size:11px;color:var(--stamp);font-weight:400}
+.g p{font-size:13px;color:var(--ink-2);line-height:1.85}
+.note{margin-top:20px;padding:16px 18px;border:1px solid var(--ink);background:var(--card);font-size:13px;line-height:1.9}
+.note h3{font-family:"Shippori Mincho",serif;font-size:15px;margin-bottom:6px}
+.note + .note{margin-top:12px}
+
+.form{background:var(--mizu);border:1px solid var(--rule);padding:22px 24px;margin-top:2px}
+.form h3{font-family:"Shippori Mincho",serif;font-size:16px;margin-bottom:8px}
+.form ol{font-size:13.5px;margin:12px 0 16px 20px}
+.form ol li{margin-bottom:3px}
+.form .big{display:inline-block;background:var(--ink);color:var(--paper);text-decoration:none;padding:11px 26px;font-size:14px}
+.form .big:hover{background:var(--stamp)}
+.form .addr{font-family:"Roboto Mono",monospace;font-size:13px;margin-left:14px}
+.form .fine{font-size:12px;color:var(--ink-2);margin-top:14px;line-height:1.8}
+
+footer{margin-top:46px;border-top:1px solid var(--ink);padding:20px 0 44px;font-size:12px;color:var(--ink-3);line-height:1.9}
+
+@media (max-width:860px){
+  .cols{grid-template-columns:1fr;gap:20px}
+  .panel{position:static}
+  .callout{grid-template-columns:1fr;gap:14px}
+  .cell{min-height:62px;padding:4px 3px 5px}
+  .chip{font-size:10px;padding:2px 3px;border-left-width:2px}
+  .chip .t{display:none}
+  .ticket{grid-template-columns:104px 1fr}
+  .notch{left:104px}
+  .stub .md{font-size:25px}
+  .ticket .body{padding:16px}
+  .masthead h1{font-size:22px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="stamp" aria-hidden="true">傍聴</div>
+    <div>
+      <h1>傍聴に行こう</h1>
+      <p>応援傍聴の呼びかけを、一枚のカレンダーに。予約いらず・お金いらず・途中で帰ってもいい</p>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="next" aria-labelledby="next-h">
+    <p class="eyebrow" id="next-h">次に行ける傍聴</p>
+    <div id="ticket"></div>
+  </section>
+
+  <section class="callout" aria-labelledby="ask-h">
+    <div>
+      <h2 id="ask-h">傍聴を呼びかけている方へ</h2>
+      <p>チラシは配った先までしか届きません。ここに載せれば、その日に動ける人の目に入ります。掲載は無料です。</p>
+    </div>
+    <a class="mail" id="mail-top" href="#">掲載を依頼する<small id="mail-top-addr"></small></a>
+  </section>
+
+  <div class="cols">
+    <section aria-labelledby="cal-h">
+      <div class="calhead">
+        <h2 class="ym" id="cal-h"></h2>
+        <div class="nav">
+          <button type="button" id="prev">← 前の月</button>
+          <button type="button" id="today">今月</button>
+          <button type="button" id="nextm">次の月 →</button>
+        </div>
+      </div>
+      <div class="dow-row"><div>日</div><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div></div>
+      <div class="grid" id="grid"></div>
+      <p class="legend">
+        <span><i class="a"></i>誰でも傍聴できる</span>
+        <span><i class="b"></i>非公開・要確認</span>
+      </p>
+    </section>
+
+    <aside class="panel" aria-live="polite">
+      <p class="ph">この日の裁判</p>
+      <div class="pb" id="panel"></div>
+    </aside>
+  </div>
+
+  <section class="sec" aria-labelledby="up-h">
+    <h2 id="up-h">これからの予定<small>えらぶとカレンダーが動きます</small></h2>
+    <div class="list" id="list"></div>
+  </section>
+
+  <section class="sec" aria-labelledby="how-h">
+    <h2 id="how-h">はじめての傍聴<small>知っておけば、あとは入るだけ</small></h2>
+    <div class="guide">
+      <div class="g"><h3><span>01</span>持ち物</h3><p>身分証も申込書もいりません。手ぶらで行けます。メモ帳とペンだけ持っていくと、あとで記憶を組み立てやすくなります。</p></div>
+      <div class="g"><h3><span>02</span>入口で</h3><p>受付はありません。玄関の手荷物検査を通ったら、掲示されている開廷表でその日の法廷と時刻を確かめて、法廷の扉を開けます。</p></div>
+      <div class="g"><h3><span>03</span>服装</h3><p>自由です。仕事帰りのままでも、買い物の途中でも構いません。声を出さず、静かに座っていればそれで足ります。</p></div>
+      <div class="g"><h3><span>04</span>出入り</h3><p>途中から入っても、途中で帰っても大丈夫です。扉を静かに閉めて、空いている傍聴席に座ってください。</p></div>
+      <div class="g"><h3><span>05</span>していいこと</h3><p>手書きのメモは取れます。聞くこと、見ること、記録することは傍聴人に認められています。</p></div>
+      <div class="g"><h3><span>06</span>してはいけないこと</h3><p>撮影・録音・録画は禁止です。携帯は電源を切るか機内モードに。発言や拍手もできません。</p></div>
+    </div>
+
+    <div class="note">
+      <h3>入れないことがある、3つの場合</h3>
+      <p><strong>弁論準備手続</strong>——民事裁判の途中で、当事者と裁判官だけが争点を整理する回です。原則として傍聴席がありません。<br>
+      <strong>尋問の公開停止</strong>——性被害など、人前で話すことが著しく困難な事柄を当事者が語る場面では、裁判所が一時的に傍聴人を退廷させることがあります（人事訴訟法22条など）。前半だけ聞ける、という日もあります。<br>
+      <strong>傍聴席が埋まったとき</strong>——注目されている事件では、開廷前に整理券が配られることがあります。関心が高そうな日は早めに着いてください。</p>
+    </div>
+
+    <div class="note">
+      <h3>この日の裁判に、行けなかったとしても</h3>
+      <p>傍聴席に人がいることは、当事者にとって「見られている」という事実そのものです。ひとりで法廷に座り続けてきた人にとって、後ろの席に知らない誰かがいることの意味は小さくありません。一回だけ、途中まででも構いません。</p>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="send-h">
+    <h2 id="send-h">掲載を依頼する<small>無料・返信は運営者から個別に</small></h2>
+    <div class="form">
+      <h3>メールに、この6つを書いてください</h3>
+      <ol>
+        <li>期日（日付・開始時刻）</li>
+        <li>裁判所名と法廷番号</li>
+        <li>事件名（わかれば事件番号も）</li>
+        <li>手続の種類（口頭弁論・尋問・判決言渡し・弁論準備 など）</li>
+        <li>どんな裁判か、3〜4行の説明</li>
+        <li>呼びかけている団体名・お名前と、公開してよい範囲</li>
+        <li>期日のあとに集会・記者会見があれば、その時間と場所</li>
+      </ol>
+      <a class="big" id="mail-btn" href="#">メールを書く</a><span class="addr" id="mail-addr"></span>
+      <p class="fine">チラシの画像をそのまま送っていただいても構いません。こちらで文字に起こします。<br>
+      <strong>当事者のお名前は、ご本人が実名での掲載を望まれる場合をのぞき、掲載しません。</strong>原告・被告といった立場での表記にそろえています。あわせて、個人の携帯番号・住所・振込口座も載せません。カンパの受付先など連絡が必要なものは、この運営者宛の問い合わせを経由して、ご本人におつなぎします。<br>
+      係属中の事件については、どちらの立場にも与しない書き方に整えたうえで掲載します。文面は公開前にご本人へお送りして確認をとります。</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>掲載内容は、傍聴を呼びかけている方から提供された情報およびチラシにもとづいています。事件の説明は呼びかけ人の主張であり、裁判所が認定した事実とは限りません。<br>
+    期日は直前に変更・取消しになることがあります。お出かけ前に、呼びかけ人または裁判所へご確認ください。<br>
+    当事者のお名前は掲載していません。原告・被告など、訴訟上の立場で表記しています。掲載の削除・修正のご依頼は運営者までお知らせください。すみやかに対応します。</p>
+  </footer>
+</main>
+
+<script>
+/* ============================================================
+   1. 運営者のメールアドレス —— ここを自分のアドレスに変えてください
+   ============================================================ */
+const SITE_EMAIL = "your-address@example.com";
+
+/* ============================================================
+   2. 事件のカルテ
+      caseNo・parties は、わからなければ "" のままで大丈夫です
+   ============================================================ */
+const CASES = {
+
+  "jichiidai": {
+    title: "自治医科大学 修学資金制度をめぐる訴訟",
+    caseNo: "",
+    court: "東京地方裁判所",
+    dept:  "",
+    parties: "原告 医師（自治医大2022年卒） ／ 被告 自治医科大学・愛知県",
+    host: "本訴原告",
+    contact: "jichiidai_lawsuit@icloud.com",
+    lede: "自治医大を2022年に卒業した医師が、母校と愛知県を相手に、卒業後の進路を拘束する修学資金制度そのものの違憲性・違法性を主張して、2025年3月5日に提訴しました。2025年6月2日の第1回以降、2〜3か月おきに期日が重ねられています。",
+    points: [
+      "卒業後の勤務を義務づける修学資金制度が、憲法に反しないか",
+      "制度の運用が、法令上許されるものだったか"
+    ]
+  },
+
+  "t-rikon": {
+    title: "離婚請求事件",
+    caseNo: "",
+    court: "東京家庭裁判所",
+    dept:  "",
+    parties: "原告 女性",
+    host: "痴漢・性暴力を許さない会！",
+    lede: "家庭のなかで起きたストーカー行為が問題になっている離婚裁判です。呼びかけ人によれば、原告は長いあいだ誰にも理解されないまま苦しんできたとのことです。",
+    points: [
+      "家庭内で継続的なつきまとい行為があったか",
+      "それが離婚原因として認められるか"
+    ]
+  },
+
+  "osato-koso": {
+    title: "名誉毀損損害賠償請求控訴事件",
+    caseNo: "",
+    court: "東京高等裁判所",
+    dept:  "",
+    parties: "被控訴人（一審原告）元市議 ／ 控訴人（一審被告）元同僚市議",
+    host: "痴漢・性暴力を許さない会！ほか支援団体",
+    lede: "セクハラ被害を告発したあとに受けた誹謗中傷をめぐる裁判です。2026年3月19日の一審判決で原告が勝訴し、同年4月6日に被告側が控訴しました。その控訴審にあたります。",
+    points: [
+      "告発後にくり返された発信が名誉毀損にあたるか",
+      "一審が認めた損害の評価を、高裁がどう見るか",
+      "性被害の告発に対する二次被害を、司法がどこまで受けとめるか"
+    ]
+  }
+
+  /* ▼ 新しい事件はこの下に追加します。書き方は上と同じです。
+  ,"あたらしいID": {
+    title:"", caseNo:"", court:"", dept:"", parties:"", host:"",
+    contact:"",        // 公開してよい連絡先だけ。電話番号は書かない
+    lede:"", points:["",""]
+  }
+  */
+};
+
+/* ============================================================
+   3. 開廷の予定
+      open: true  … 誰でも傍聴できる
+      open: false … 非公開、または要確認
+   ============================================================ */
+const HEARINGS = [
+
+  { case:"jichiidai", date:"2026-08-26", time:"13:30", room:"610号法廷",
+    kind:"第7回口頭弁論", open:true, level:"報道あり",
+    note:"毎回、多くの傍聴人が集まっている裁判です。傍聴席が早く埋まることがあります。",
+    after:"期日終了後、14時30分頃から16時頃まで、日比谷図書文化館 セミナールームA（日比谷公園内）で記者会見と支援者集会が開かれます。法廷から会場まで移動します。参加される方は、事前に呼びかけ人まで一報を。" },
+
+  { case:"t-rikon", date:"2026-09-02", time:"13:30", room:"121号法廷",
+    kind:"当事者尋問", open:true, level:"見ごたえあり",
+    note:"当事者が証言台に立ちます。事件の中身がいちばん伝わる回です。ただし内容によっては、途中で傍聴人が退廷を求められることがあります。" },
+
+  { case:"osato-koso", date:"2026-09-08", time:"11:30", room:"511号法廷",
+    kind:"控訴審 第1回", open:true, level:"短時間",
+    note:"控訴審の第1回は、書面の確認だけで数分から十数分で終わることがあります。開始時刻に遅れないでください。" }
+
+  /* ▼ 新しい期日はこの下に追加します。
+  ,{ case:"あたらしいID", date:"2026-00-00", time:"00:00", room:"",
+     kind:"", open:true, level:"", note:"",
+     after:"" }        // 期日後に集会や記者会見があるときだけ書く
+  */
+];
+
+/* ============================================================
+   ここから下はしくみです。ふだんは触らなくて大丈夫です。
+   ============================================================ */
+
+const DOW = ["日","月","火","水","木","金","土"];
+const pad = n => String(n).padStart(2,"0");
+const key = (y,m,d) => `${y}-${pad(m+1)}-${pad(d)}`;
+const parse = s => { const [y,m,d] = s.split("-").map(Number); return new Date(y, m-1, d); };
+const wareki = y => `令和${y-2018}年`;
+const esc = s => String(s||"").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+const MAILTO = "mailto:" + SITE_EMAIL +
+  "?subject=" + encodeURIComponent("傍聴カレンダー掲載のお願い") +
+  "&body=" + encodeURIComponent(
+    "1. 期日（日付・開始時刻）：\n" +
+    "2. 裁判所名・法廷番号：\n" +
+    "3. 事件名（事件番号）：\n" +
+    "4. 手続の種類：\n" +
+    "5. どんな裁判か（3〜4行）：\n" +
+    "6. 呼びかけ団体名・お名前／公開してよい範囲：\n\n" +
+    "（チラシの画像を添付していただいても構いません）\n");
+
+["mail-top","mail-btn"].forEach(id => { document.getElementById(id).href = MAILTO; });
+document.getElementById("mail-top-addr").textContent = SITE_EMAIL;
+document.getElementById("mail-addr").textContent = SITE_EMAIL;
+
+const now = new Date();
+const TODAY = key(now.getFullYear(), now.getMonth(), now.getDate());
+
+const byDate = {};
+HEARINGS.slice().sort((a,b) => a.date < b.date ? -1 : a.date > b.date ? 1 : a.time.localeCompare(b.time))
+  .forEach(h => { (byDate[h.date] ||= []).push(h); });
+
+const upcoming = HEARINGS.filter(h => h.date >= TODAY)
+  .sort((a,b) => a.date < b.date ? -1 : a.date > b.date ? 1 : a.time.localeCompare(b.time));
+
+let view, selected = null, slot = 0;
+{
+  const anchor = upcoming[0] ? parse(upcoming[0].date) : now;
+  view = { y: anchor.getFullYear(), m: anchor.getMonth() };
+}
+
+function renderTicket(){
+  const box = document.getElementById("ticket");
+  const h = upcoming.find(x => x.open) || upcoming[0];
+  if(!h){
+    box.innerHTML = '<p class="empty" style="border:1px solid var(--rule);background:var(--card)">これから先の予定は、まだ登録されていません。</p>';
+    return;
+  }
+  const c = CASES[h.case], d = parse(h.date);
+  box.innerHTML = `
+    <div class="ticket">
+      <span class="notch t"></span><span class="notch b"></span>
+      <div class="stub">
+        <span class="md">${d.getMonth()+1}<small style="font-size:13px">月</small>${d.getDate()}<small style="font-size:13px">日</small></span>
+        <span class="dow">${DOW[d.getDay()]}曜日</span>
+        <span class="yr">${wareki(d.getFullYear())}</span>
+        <span class="tm">${esc(h.time)}</span>
+      </div>
+      <div class="body">
+        <h2>${esc(c.title)}</h2>
+        <p class="meta">${esc(c.court)}${c.dept ? " " + esc(c.dept) : ""}　${esc(h.room)}${c.caseNo ? `　<span class="mono" style="font-size:12px">${esc(c.caseNo)}</span>` : ""}</p>
+        <p class="lede">${esc(c.lede)}</p>
+        <p class="tags">
+          <span class="tag ${h.open?"open":"shut"}">${h.open?"誰でも傍聴できます":"非公開・要確認"}</span>
+          <span class="tag plain">${esc(h.kind)}</span>
+          ${h.level ? `<span class="tag hot">${esc(h.level)}</span>` : ""}
+        </p>
+      </div>
+    </div>`;
+}
+
+function renderCal(){
+  const {y,m} = view;
+  document.getElementById("cal-h").innerHTML = `${y}年${m+1}月<small>${wareki(y)}${m+1}月</small>`;
+  const first = new Date(y,m,1).getDay();
+  const days  = new Date(y,m+1,0).getDate();
+  const g = document.getElementById("grid");
+  g.innerHTML = "";
+  for(let i=0;i<first;i++){
+    const b = document.createElement("div"); b.className = "cell blank"; g.appendChild(b);
+  }
+  for(let d=1; d<=days; d++){
+    const k = key(y,m,d), list = byDate[k];
+    const el = document.createElement(list ? "button" : "div");
+    el.className = "cell" + (list?" has":"") + (k===TODAY?" today":"") + (k===selected?" sel":"");
+    if(list){
+      el.type = "button";
+      el.setAttribute("aria-label", `${m+1}月${d}日の裁判 ${list.length}件`);
+      el.addEventListener("click", () => select(k));
+    }
+    let inner = `<span class="n">${d}</span>`;
+    (list||[]).slice(0,2).forEach(h => {
+      inner += `<span class="chip ${h.open?"":"shut"}"><span class="t">${esc(h.time)}</span>${esc(CASES[h.case].title)}</span>`;
+    });
+    if(list && list.length>2) inner += `<span class="chip" style="border-left-color:var(--rule-2);background:none">ほか${list.length-2}件</span>`;
+    el.innerHTML = inner;
+    g.appendChild(el);
+  }
+}
+
+function renderPanel(){
+  const box = document.getElementById("panel");
+  const list = selected ? byDate[selected] : null;
+  if(!list){
+    box.innerHTML = `<p class="empty"><span class="big">傍</span>カレンダーの色がついた日を<br>えらんでください</p>`;
+    return;
+  }
+  if(slot >= list.length) slot = 0;
+  const h = list[slot], c = CASES[h.case], d = parse(h.date);
+
+  let html = "";
+  if(list.length > 1){
+    html += `<p class="multi">この日は${list.length}件あります　`;
+    list.forEach((x,i) => { html += `<button type="button" data-slot="${i}" aria-pressed="${i===slot}">${esc(x.time)}</button>`; });
+    html += `</p>`;
+  }
+  html += `
+    <p class="dt-date">${d.getFullYear()}.${pad(d.getMonth()+1)}.${pad(d.getDate())}（${DOW[d.getDay()]}）${esc(h.time)}〜</p>
+    <h3 class="dt-title">${esc(c.title)}</h3>
+    ${c.caseNo ? `<p class="dt-no">${esc(c.caseNo)}</p>` : ""}
+    <p class="tags">
+      <span class="tag ${h.open?"open":"shut"}">${h.open?"誰でも傍聴できます":"非公開・要確認"}</span>
+      <span class="tag plain">${esc(h.kind)}</span>
+      ${h.level ? `<span class="tag hot">${esc(h.level)}</span>` : ""}
+    </p>
+    <table class="rows">
+      <tr><th>裁判所</th><td>${esc(c.court)}${c.dept ? "<br>" + esc(c.dept) : ""}</td></tr>
+      <tr><th>場所</th><td>${esc(h.room)}</td></tr>
+      ${c.parties ? `<tr><th>当事者</th><td>${esc(c.parties)}</td></tr>` : ""}
+      ${c.host ? `<tr><th>呼びかけ</th><td>${esc(c.host)}</td></tr>` : ""}
+      ${c.contact ? `<tr><th>連絡先</th><td><a class="mono" style="font-size:12px" href="mailto:${esc(c.contact)}">${esc(c.contact)}</a></td></tr>` : ""}
+    </table>
+    <p class="dt-lede">${esc(c.lede)}<span class="src">呼びかけ人の説明にもとづく記述です</span></p>
+    <p class="dt-h">この日のみどころ</p>
+    <p style="font-size:13px">${esc(h.note)}</p>
+    ${h.after ? `<p class="dt-h">期日のあとに</p><p class="after">${esc(h.after)}</p>` : ""}
+    <p class="dt-h">争われていること</p>
+    <ul class="dt-points">${c.points.map(p => `<li>${esc(p)}</li>`).join("")}</ul>`;
+  if(!h.open){
+    html += `<p class="warn"><b>この回は傍聴席がない可能性があります。</b>お出かけ前に呼びかけ人へご確認ください。運営者宛にご連絡いただければ、おつなぎします。</p>`;
+  }
+  box.innerHTML = html;
+  box.querySelectorAll("[data-slot]").forEach(b => {
+    b.addEventListener("click", () => { slot = Number(b.dataset.slot); renderPanel(); });
+  });
+}
+
+function renderList(){
+  const box = document.getElementById("list");
+  if(!upcoming.length){ box.innerHTML = `<p class="empty">まだ登録がありません。</p>`; return; }
+  box.innerHTML = upcoming.map(h => {
+    const c = CASES[h.case], d = parse(h.date);
+    return `<button type="button" class="item" data-date="${h.date}">
+      <span class="d">
+        <span class="md">${d.getMonth()+1}<small style="font-size:11px">/</small>${d.getDate()}</span>
+        <span class="dw">${DOW[d.getDay()]}</span>
+        <span class="tm">${esc(h.time)}</span>
+      </span>
+      <span>
+        <span class="ti">${esc(c.title)}</span>
+        <span class="mt">${esc(c.court)}　${esc(h.room)}　${esc(h.kind)}</span>
+        <span class="tags"><span class="tag ${h.open?"open":"shut"}">${h.open?"傍聴できます":"要確認"}</span></span>
+      </span>
+    </button>`;
+  }).join("");
+  box.querySelectorAll("[data-date]").forEach(b => {
+    b.addEventListener("click", () => {
+      const d = parse(b.dataset.date);
+      view = { y:d.getFullYear(), m:d.getMonth() };
+      select(b.dataset.date);
+      document.getElementById("cal-h").scrollIntoView({behavior:"smooth", block:"start"});
+    });
+  });
+}
+
+function select(k){ selected = k; slot = 0; renderCal(); renderPanel(); }
+
+document.getElementById("prev").addEventListener("click", () => {
+  view.m--; if(view.m < 0){ view.m = 11; view.y--; } renderCal();
+});
+document.getElementById("nextm").addEventListener("click", () => {
+  view.m++; if(view.m > 11){ view.m = 0; view.y++; } renderCal();
+});
+document.getElementById("today").addEventListener("click", () => {
+  view = { y: now.getFullYear(), m: now.getMonth() }; renderCal();
+});
+
+renderTicket(); renderCal(); renderPanel(); renderList();
+if(upcoming[0]) select(upcoming[0].date);
+</script>
+</body>
+</html>
